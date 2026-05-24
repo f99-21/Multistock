@@ -1,0 +1,87 @@
+import { createBrowserRouter, Navigate } from "react-router-dom";
+
+import { Layout } from "./components/Layout";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+
+import { Login } from "./pages/Login";
+import { Dashboard } from "./pages/Dashboard";
+import { Productos } from "./pages/Productos";
+import { Movimientos } from "./pages/Movimientos";
+import { Devoluciones } from "./pages/Devoluciones";
+import { Tiendas } from "./pages/Tiendas";
+import { Vendedores } from "./pages/Vendedores";
+import { Usuarios } from "./pages/Usuarios";
+import { Reportes } from "./pages/Reportes";
+
+export const router = createBrowserRouter([
+
+  {
+    path: "/login",
+    element: <Login />
+  },
+
+  {
+    path: "/",
+
+    element: (
+
+      <ProtectedRoute>
+
+        <Layout />
+
+      </ProtectedRoute>
+
+    ),
+
+    children: [
+
+      {
+        index: true,
+        element: <Dashboard />
+      },
+
+      {
+        path: "productos",
+        element: <Productos />
+      },
+
+      {
+        path: "movimientos",
+        element: <Movimientos />
+      },
+
+      {
+        path: "devoluciones",
+        element: <Devoluciones />
+      },
+
+      {
+        path: "tiendas",
+        element: <Tiendas />
+      },
+
+      {
+        path: "vendedores",
+        element: <Vendedores />
+      },
+
+      {
+        path: "usuarios",
+        element: <Usuarios />
+      },
+
+      {
+        path: "reportes",
+        element: <Reportes />
+      }
+
+    ]
+
+  },
+
+  {
+    path: "*",
+    element: <Navigate to="/login" replace />
+  }
+
+]);
